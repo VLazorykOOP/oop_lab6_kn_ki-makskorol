@@ -1,0 +1,83 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// Абстрактний базовий клас "Фігура"
+class Shape {
+public:
+    // Віртуальна функція для обчислення об'єму
+    virtual double volume() const = 0;
+};
+
+// Клас "Паралелепіпед"
+class Parallelepiped : public Shape {
+private:
+    double x, y, z; // Сторони
+
+public:
+    Parallelepiped(double x_val, double y_val, double z_val) : x(x_val), y(y_val), z(z_val) {}
+
+    // Обчислення об'єму паралелепіпеда
+    double volume() const override {
+        return x * y * z;
+    }
+};
+
+// Клас "Піраміда"
+class Pyramid : public Shape {
+private:
+    double x, y, h; // Сторони та висота
+
+public:
+    Pyramid(double x_val, double y_val, double h_val) : x(x_val), y(y_val), h(h_val) {}
+
+    // Обчислення об'єму піраміди
+    double volume() const override {
+        return (x * y * h) / 3.0;
+    }
+};
+
+// Клас "Тетраедр"
+class Tetrahedron : public Shape {
+private:
+    double a; // Сторона
+
+public:
+    Tetrahedron(double a_val) : a(a_val) {}
+
+    // Обчислення об'єму тетраедра
+    double volume() const override {
+        return (sqrt(2) / 12.0) * pow(a, 3);
+    }
+};
+
+// Клас "Куля"
+class Sphere : public Shape {
+private:
+    double r; // Радіус
+
+public:
+    Sphere(double r_val) : r(r_val) {}
+
+    // Обчислення об'єму кулі
+    double volume() const override {
+        return (4.0 / 3.0) * M_PI * pow(r, 3);
+    }
+};
+
+int main() {
+    // Створення об'єктів різних фігур
+    Parallelepiped parallelepiped(3, 4, 5);
+    Pyramid pyramid(6, 8, 10);
+    Tetrahedron tetrahedron(5);
+    Sphere sphere(4);
+
+    // Виведення об'ємів фігур
+    cout << "Volume of Parallelepiped: " << parallelepiped.volume() << endl;
+    cout << "Volume of Pyramid: " << pyramid.volume() << endl;
+    cout << "Volume of Tetrahedron: " << tetrahedron.volume() << endl;
+    cout << "Volume of Sphere: " << sphere.volume() << endl;
+
+    return 0;
+}
