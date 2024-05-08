@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Базовий клас "Програмне забезпечення"
+class Software {
+protected:
+    string name;
+
+public:
+    Software(const string& n) : name(n) {}
+
+    virtual void displayType() const {
+        cout << "Software: " << name << endl;
+    }
+};
+
+// Похідний клас "Прикладне програмне забезпечення"
+class ApplicationSoftware : public Software {
+public:
+    ApplicationSoftware(const string& n) : Software(n) {}
+
+    void displayType() const override {
+        cout << "Application Software: " << name << endl;
+    }
+};
+
+// Похідний клас "Системне програмне забезпечення"
+class SystemSoftware : public Software {
+public:
+    SystemSoftware(const string& n) : Software(n) {}
+
+    void displayType() const override {
+        cout << "System Software: " << name << endl;
+    }
+};
+
+// Похідний клас "Операційна система"
+class OperatingSystem : public SystemSoftware {
+public:
+    OperatingSystem(const string& n) : SystemSoftware(n) {}
+
+    void displayType() const override {
+        cout << "Operating System: " << name << endl;
+    }
+};
+
+int main() {
+    // Створення об'єктів різних типів програмного забезпечення
+    Software software("Generic Software");
+    ApplicationSoftware appSoftware("Word Processor");
+    SystemSoftware sysSoftware("Device Driver");
+    OperatingSystem os("Windows");
+
+    // Виведення типів програмного забезпечення
+    software.displayType();
+    appSoftware.displayType();
+    sysSoftware.displayType();
+    os.displayType();
+
+    return 0;
+}
